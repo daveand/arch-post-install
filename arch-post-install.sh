@@ -5,9 +5,9 @@ NC='\033[0m'
 
 echo "Running arch post install script..."
 
-read -p "Update system and install packages? y/n: " continue
+read -p "Update system and install packages? y/n: " updateConfim
 
-if [ $continue == "y" ]
+if [ $updateConfim == "y" ]
 	then
 	echo -e "${BLUE}\n- Updating system through pacman:${NC}"
 	update=`sudo pacman -Syu --noconfirm`
@@ -40,8 +40,13 @@ if [ $vimConfigConfirm == "y" ]
   nvChad=`git clone -b v2.0 https://github.com/NvChad/NvChad ~/.config/nvim --depth 1`
 	echo $nvChad
 
-  copyConfig=`git clone https://github.com/daveand/neovim-config.git ~/.config/nvim`
+  getConfig=`git clone https://github.com/daveand/neovim-config.git`
+  echo $getConfig
+    
+  copyConfig=`cd neovim-config && cp nvim/ ~/.config/nvim/`
   echo $copyConfig
+
+
 fi
 
 echo -e "${BLUE}\n- Arch post installation done!${NC}"
