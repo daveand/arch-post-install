@@ -14,7 +14,7 @@ if [ $updateConfim == "y" ]
 	echo $update
 	
 	echo -e "${BLUE}\n- Installing packets from pacman repository:${NC}"
-	packets=`sudo pacman -S --noconfirm --needed neovim kitty `
+	packets=`sudo pacman -S --noconfirm --needed neovim kitty yazi && exit`
 	echo $packets
 fi
 
@@ -27,7 +27,7 @@ if [ $yayConfirm == "y" ]
 	yayPrepare=`sudo pacman -S --noconfirm --needed git base-devel`
   echo $yayPrepare
 
-	yayInstall=`git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si`
+	yayInstall=`git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si && cd ..`
 	echo $yayInstall
 fi
 
@@ -43,7 +43,7 @@ if [ $vimConfigConfirm == "y" ]
   getConfig=`git clone https://github.com/daveand/neovim-config.git`
   echo $getConfig
     
-  copyConfig=`cd neovim-config && cp nvim/ ~/.config/nvim/`
+  copyConfig=`cd neovim-config && yes | cp -rf nvim ~/.config/`
   echo $copyConfig
 
 
